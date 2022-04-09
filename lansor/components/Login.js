@@ -28,7 +28,7 @@ class Login extends React.Component {
         console.log(this.state.user,this.state.password)
 
         const userCredentials = {
-            user: this.state.user,
+            name: this.state.user,
             password: this.state.password
         }
 
@@ -40,10 +40,8 @@ class Login extends React.Component {
             body: JSON.stringify(userCredentials)
         }
 
-        fetch('http://localhost:3000/Customers' , fetchObj).then(response => response.json()).then(response => {
-            resolve(response)
-        }).then(result => {
-                console.log(result)
+        fetch(`http://localhost:3000/login`, fetchObj).then(result => {
+            console.log(result)
         })
 
 
