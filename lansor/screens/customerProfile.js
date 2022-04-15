@@ -9,8 +9,12 @@ export default function CustomerProfile({ navigation }) {
     navigation.navigate('CustomerCarDetails');
   }
 
+  const car ={
+    customer_id:customer._id,
+  }
+
   const pressHandlerInitOrder = () => {
-    navigation.navigate('CustomerInitOrder');
+    navigation.navigate('CustomerInitOrder',car);
   }
 
   const pressHandlerLogout = () => {  //skuska na tie data
