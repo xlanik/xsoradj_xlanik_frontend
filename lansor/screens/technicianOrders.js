@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList, Alert } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import TechnicianOrderItem from '../components/technicianOrderItem';
 
 export default function TechnicianOrders( {navigation} ) {
@@ -7,10 +7,14 @@ export default function TechnicianOrders( {navigation} ) {
   const technicianOrders = navigation.getParam('');
   //console.log(technicianOrders);
 
-  const updateRepairedStatus = async (id) => {
+  const updateRepairedStatus = async (id, description) => {
+
     const carUpdate = {
       state: "repaired",
+      description: description,
     }
+    
+    console.log(carUpdate);
 
     const fetchObj= {
         method: 'PATCH',
@@ -34,8 +38,10 @@ export default function TechnicianOrders( {navigation} ) {
     navigation.navigate('TechnicianProfile');
   }
 
-  const pressHandlerRepaired = (item) => {
-    console.log(item._id);
+  const pressHandlerRepaired = (item, description) => {
+
+    if(description == "") description = `Technik ${item.name} nevyplnil údaje o aute`;
+    //console.log(item._id);
 
     if(item.state == "repaired"){
       Alert.alert(
@@ -57,23 +63,25 @@ export default function TechnicianOrders( {navigation} ) {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        { text: "Rozumiem", onPress: () => updateRepairedStatus(item._id) }
+        { text: "Rozumiem", onPress: () => updateRepairedStatus(item._id, description) }
       ])
 
     return;
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.list}>
-        <FlatList
-          data={technicianOrders}
-          renderItem={({item}) => <TechnicianOrderItem item={item} pressHandlerRepaired={pressHandlerRepaired}/>}
-          keyExtractor={(item, index) => index.toString()}
-        />
-        
+    
+      <View style={styles.container}>
+        <View style={styles.list}>
+          <FlatList
+            data={technicianOrders}
+            renderItem={({item}) => <TechnicianOrderItem item={item} pressHandlerRepaired={pressHandlerRepaired}/>}
+            keyExtractor={(item, index) => index.toString()}
+          />
+          
+        </View>
       </View>
-    </View>
+   
   );
 }
 

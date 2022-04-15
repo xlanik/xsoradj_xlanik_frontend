@@ -53,7 +53,7 @@ export default function CustomerProfile({ navigation }) {
           return;
         }
 
-        navigation.navigate('TechnicianOrderHistory', ordersJsonRes);
+        navigation.navigate('TechnicianOrderHistory', {'': ordersJsonRes});
   
       } catch (error) {
         console.error(error);
@@ -96,10 +96,10 @@ const styles = StyleSheet.create({
   },
   name:{
     fontWeight: 'bold',
-    fontSize: 24
+    fontSize: 30
   },
   button:{
-    marginTop: 25,
+    marginTop: 35,
     width: 250,
   }
 });

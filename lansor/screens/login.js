@@ -81,16 +81,17 @@ const styles = StyleSheet.create({
   },
   name:{
     fontWeight: 'bold',
-    fontSize: 24
+    fontSize: 35
   },
   input:{
     borderWidth: 1,
     borderColor: '#C9C8C7',
     padding: 8,
-    marginTop: 25,
-    width: 150,
+    marginTop: 35,
+    width: 200,
   },
   button:{
-    marginTop: 25
+    marginTop: 35,
+    width: 200,
   }
 });

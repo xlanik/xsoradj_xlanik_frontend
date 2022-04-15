@@ -78,7 +78,7 @@ export default function Register( {navigation}) {
       Keyboard.dismiss();
     }}>
       <View style={styles.container}>
-        <Text style={styles.name}> Registrácia</Text>
+        <Text style={styles.name}> Vyplnte registráciu</Text>
 
         <TextInput style={styles.input} placeholder="Prihlasovacie meno*" onChangeText={(value) => setName(value)} />
         <TextInput style={styles.input} placeholder="Telefónne číslo*" keyboardType = 'numeric' onChangeText={(value) => setPhoneNumber(value)} />
@@ -106,14 +106,14 @@ export default function Register( {navigation}) {
     },
     name:{
       fontWeight: 'bold',
-      fontSize: 24
+      fontSize: 30
     },
     input:{
       borderWidth: 1,
       borderColor: '#C9C8C7',
       padding: 8,
       marginTop: 25,
-      width: 150,
+      width: 200,
     },
     button:{
       marginTop: 25,

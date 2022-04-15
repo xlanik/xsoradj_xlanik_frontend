@@ -1,8 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {StyleSheet, TouchableOpacity, Text, View, Image, TextInput} from 'react-native';
 
 export default function TechnicianOrderItem({ pressHandlerRepaired, item }) {
   
+  const [desc, setDesc] = useState('');
+
   var serviceActions = 'Potrebné úkony: ';
   var carState = "Potvrdiť dokončenie servisu";
   if(item.oilChange) serviceActions = serviceActions + '- výmena oleja - ';
@@ -22,7 +24,12 @@ export default function TechnicianOrderItem({ pressHandlerRepaired, item }) {
       <Text style={styles.item}>Rok výroby: {item.year}</Text>
       <Text style={styles.item}>Ev. číslo: {item.number_plate}</Text>
       <Text style={styles.item}>{serviceActions}</Text>
-      <TouchableOpacity onPress={() => pressHandlerRepaired(item)}>
+      <TextInput
+        multiline 
+        placeholder='Informácie o servisovaní' 
+        style={styles.input}
+        onChangeText={(value) => setDesc(value)} />
+      <TouchableOpacity onPress={() => pressHandlerRepaired(item, desc)}>
         <Text style={styles.itemConfirm}>{carState}</Text>
       </TouchableOpacity>
     </View>
@@ -38,7 +45,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderColor: '#bbb',
     borderWidth: 3,
-    padding: 30
+    padding: 30,
   },
   item: {
     padding: 16,
@@ -47,7 +54,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 1,
     borderRadius: 10,
-    backgroundColor: '#F7F7F7'
+    backgroundColor: '#F7F7F7',
     
   },
   image: {
@@ -65,5 +72,12 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     borderRadius: 10,
     backgroundColor: '#B7E3AE'
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#777',
+    padding: 8,
+    margin: 10,
+    width: 200,
   }
 });
