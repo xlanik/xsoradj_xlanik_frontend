@@ -23,13 +23,13 @@ export default function CustomerServiceOptions({ navigation }) {
             brand : navigation.getParam("brand"),
             model : navigation.getParam("model"),
             year : navigation.getParam("year"),
+            number_plate : navigation.getParam("number_plate"),
             oilChange : oilChange,
             filterChange : filterChange,
             tireChange : tyreChange,
             motorService : motorService,
             description: description
         }
-        //console.log(car);
         navigation.navigate('CustomerImageUpload',car);
     }
 

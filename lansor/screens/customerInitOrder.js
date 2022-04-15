@@ -7,6 +7,7 @@ export default function CustomerInitOrder({ navigation }) {
     const [znacka, setZnacka] = useState('');
     const [model, setModel] = useState('');
     const [rokVyroby, setRokVyroby] = useState('');
+    const [spz, setSpz] = useState('');
 
     const cust_id = navigation.getParam("customer_id");
     
@@ -34,6 +35,7 @@ export default function CustomerInitOrder({ navigation }) {
                 brand : znacka,
                 model : model,
                 year : rokVyroby,
+                number_plate: spz,
             }
             navigation.navigate('CustomerServiceOptions',car);
         } catch (error) {
@@ -60,6 +62,7 @@ export default function CustomerInitOrder({ navigation }) {
             <TextInput style={styles.input} placeholder="Značka*" onChangeText={(value) => setZnacka(value)} />
             <TextInput style={styles.input} placeholder="Model*" onChangeText={(value) => setModel(value)} />
             <TextInput style={styles.input} placeholder="Rok výroby*" keyboardType = 'numeric' onChangeText={(value) => setRokVyroby(value)} /> 
+            <TextInput style={styles.input} placeholder="ŠPZ*" onChangeText={(value) => setSpz(value)} />
             <View style={styles.option}>
                 <Switch
                     trackColor={{ false: "#767577", true: "#81b0ff" }}

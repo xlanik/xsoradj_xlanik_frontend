@@ -32,12 +32,12 @@ export default function CustomerProfile({ navigation }) {
       }
   }
 
-  const car ={
+  const cust_id ={
     customer_id:customer._id,
   }
 
   const pressHandlerInitOrder = () => {
-    navigation.navigate('CustomerInitOrder',car);
+    navigation.navigate('CustomerInitOrder',cust_id);
   }
 
   const pressHandlerLogout = () => {  //skuska na tie data
