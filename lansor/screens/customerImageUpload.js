@@ -7,12 +7,12 @@ export default function CustomerImageUpload({ navigation }) {
         navigation.navigate('CustomerProfile');
 
         Alert.alert(
-            "Dokončené",
-            "Objednávka do servisu bola úspešná, budete presmerovaný na profil.",
-            [
-              { text: "OK", onPress: () => console.log("OK Pressed") }
-            ]
-          );
+          "Dokončené",
+          "Objednávka do servisu bola úspešná, ste presmerovaný na profil.",
+          [
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ]
+        );
     }
 
     return (

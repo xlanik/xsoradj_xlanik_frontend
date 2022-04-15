@@ -17,33 +17,63 @@ import TechnicianOrderHistory from './screens/technicianOrderHistory';
 const screens = {
   Login: {
     screen: Login,
+    navigationOptions: {
+      title: 'Prihlásenie'
+    }
   },
   Register: {
     screen: Register,
+    navigationOptions: {
+      title: 'Registrácia do aplikácie'
+    }
   },
   CustomerProfile: {
     screen: CustomerProfile,
+    navigationOptions: {
+      title: 'Môj profil'
+    }
   },
   CustomerCarDetails: {
     screen: CustomerCarDetails,
+    navigationOptions: {
+      title: 'Stav vozidiel'
+    }
   },
   CustomerInitOrder: {
     screen: CustomerInitOrder,
+    navigationOptions: {
+      title: 'Objednať vozidlo do servisu'
+    }
   },
   CustomerServiceOptions: {
     screen: CustomerServiceOptions,
+    navigationOptions: {
+      title: 'Zvoľte požadované úkony'
+    }
   },
   CustomerImageUpload: {
     screen: CustomerImageUpload,
+    navigationOptions: {
+      title: 'Nahrajte fotografiu auta'
+    }
   },
   TechnicianProfile: {
     screen: TechnicianProfile,
+    navigationOptions: {
+      title: 'Môj pracovný profil'
+    }
   },
   TechnicianOrders: {
     screen: TechnicianOrders,
+    navigationOptions: {
+      title: 'Moje aktuálne zákazky'
+    }
   },
   TechnicianOrderHistory: {
     screen: TechnicianOrderHistory,
+    navigationOptions: {
+      title: 'História opravených vozidiel'
+    }
   },
 };
 

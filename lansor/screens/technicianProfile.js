@@ -4,14 +4,15 @@ import { StyleSheet, View, Text, Button, Alert} from 'react-native';
 export default function CustomerProfile({ navigation }) {
 
   const technician = navigation.getParam('loginTechnician')
+  
 
   const pressHandlerOdrders = async () => {
     try {
 
         const response = await fetch(`https://lansormtaa.herokuapp.com/TechnicianCars/${technician._id}`);
         const ordersJsonRes = await response.json();
-        console.log(ordersJsonRes);
-       
+        //console.log(ordersJsonRes);
+        
   
         if(ordersJsonRes.message){  //prisla error sprava, nema zakazky
           Alert.alert(
@@ -24,8 +25,8 @@ export default function CustomerProfile({ navigation }) {
 
           return;
         }
-
-        navigation.navigate('TechnicianOrders', ordersJsonRes);
+        
+        navigation.navigate('TechnicianOrders', {'': ordersJsonRes});   //musi sa to zabalit do objektu....
   
       } catch (error) {
         console.error(error);
@@ -52,7 +53,7 @@ export default function CustomerProfile({ navigation }) {
           return;
         }
 
-        navigation.navigate('TechnicianOrders', ordersJsonRes);
+        navigation.navigate('TechnicianOrderHistory', ordersJsonRes);
   
       } catch (error) {
         console.error(error);
