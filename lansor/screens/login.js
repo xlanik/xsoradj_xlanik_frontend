@@ -41,7 +41,11 @@ export default function Login({ navigation }) {
           "Nesprávne prihlasovacie údaje",
           "Prosím skontrolujte správnosť mena a hesla",
           [
+<<<<<<< HEAD
             { text: "OK", onPress: () => console.log("Zly velmi zly login alert") }
+=======
+            { text: "OK", onPress: () => console.log("Zly login alerttt") }
+>>>>>>> 143e5282de564dc8f8647b2bbea885db683c5884
           ]
         );
       }
