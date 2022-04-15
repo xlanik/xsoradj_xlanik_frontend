@@ -36,7 +36,7 @@ export default function Login({ navigation }) {
 
     
     try {
-      const response = await fetch(`http://localhost:3000/login`, fetchObj);
+      const response = await fetch(`https://lansormtaa.herokuapp.com/login`, fetchObj);
       const jsonResponse = await response.json();
       console.log(jsonResponse);
 
