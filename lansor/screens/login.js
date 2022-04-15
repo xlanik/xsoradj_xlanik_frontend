@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Button, TextInput } from 'react-native';
+import { StyleSheet, View, Text, Button, TextInput, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 export default function Login({ navigation }) {
 
@@ -8,14 +8,6 @@ export default function Login({ navigation }) {
 
   const pressHandlerRegister = () => {
     navigation.navigate('Register');
-  }
-
-  const pressHandlerProfile = () => {
-    navigation.navigate('CustomerProfile');
-  }
-
-  const pressHandlerTechnician = () => {
-    navigation.navigate('TechnicianProfile');
   }
 
   const pressLoginHandle = async () => {
@@ -34,45 +26,71 @@ export default function Login({ navigation }) {
         body: JSON.stringify(userCredentials)
     }
 
-    
+  
     try {
-      const response = await fetch(`https://lansormtaa.herokuapp.com/login`, fetchObj);
-      const jsonResponse = await response.json();
-      console.log(jsonResponse);
 
-      if(jsonResponse.loginCustomer) navigation.navigate('CustomerProfile');
-      if(jsonResponse.loginTechnician) navigation.navigate('TechnicianProfile');
-      if(jsonResponse.message) console.log("zle prihlasenie braši!!!");
+      const response = await fetch(`https://lansormtaa.herokuapp.com/login`, fetchObj);
+      const userJsonRes = await response.json();
+      console.log(userJsonRes);
+     
+
+      if(userJsonRes.loginCustomer) navigation.navigate('CustomerProfile', userJsonRes);
+      if(userJsonRes.loginTechnician) navigation.navigate('TechnicianProfile', userJsonRes);
+      if(userJsonRes.message){
+        Alert.alert(
+          "Nesprávne prihlasovacie údaje",
+          "Prosím skontrolujte správnosť mena a hesla",
+          [
+            { text: "OK", onPress: () => console.log("Zly login alert") }
+          ]
+        );
+      }
 
     } catch (error) {
       console.error(error);
     }
   }
 
-  const pressMoviesHandle = async () => {
-    try {
-      const response = await fetch(
-        'https://reactnative.dev/movies.json'
-      );
-      const json = await response.json();
-      console.log(json);
-      return json.movies;
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
-    <View>
-      <Text>Login Screenik</Text>
+    <TouchableWithoutFeedback onPress={() => {
+      Keyboard.dismiss();
+    }}>
+      <View style={styles.container}>
+        <Text style={styles.name}> Autoservis Lansor</Text>
 
-      <TextInput placeholder="Prihlasovacie meno" onChangeText={(value) => setName(value)} />
-      <TextInput placeholder="Heslo" onChangeText={(value) => setPassword(value)} secureTextEntry={true} />
-      <Button title='Fetch login skuska' onPress={pressLoginHandle} />
-      <Button title='getmovies' onPress={pressMoviesHandle} />
-      <Button title='Chod na registraciu' onPress={pressHandlerRegister} />
-      <Button title='Zakaznik prihlaseny' onPress={pressHandlerProfile} />
-      <Button title='Technik prihlaseny' onPress={pressHandlerTechnician} />
-    </View>
+        <TextInput style={styles.input} placeholder="Prihlasovacie meno" onChangeText={(value) => setName(value)} />
+        <TextInput style={styles.input} placeholder="Heslo" onChangeText={(value) => setPassword(value)} secureTextEntry={true} />
+        <View style={styles.button}>
+          <Button title='Prihlásiť sa' onPress={pressLoginHandle} />
+        </View>
+        <View style={styles.button}>
+          <Button title='Registrácia' onPress={pressHandlerRegister} />
+        </View>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
+
+const styles = StyleSheet.create({
+  container:{
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  
+  },
+  name:{
+    fontWeight: 'bold',
+    fontSize: 24
+  },
+  input:{
+    borderWidth: 1,
+    borderColor: '#C9C8C7',
+    padding: 8,
+    marginTop: 25,
+    width: 150,
+  },
+  button:{
+    marginTop: 25
+  }
+});
