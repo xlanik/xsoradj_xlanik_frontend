@@ -37,11 +37,11 @@ export default function CustomerProfile({ navigation }) {
     try {
 
         const response = await fetch(`https://lansormtaa.herokuapp.com/RepairedCars`);
-        const ordersJsonRes = await response.json();
-        console.log(ordersJsonRes);
+        const oderHistoryJsonRes = await response.json();
+        //console.log(oderHistoryJsonRes);
        
   
-        if(ordersJsonRes.message){  //prisla error sprava, nema zakazky
+        if(oderHistoryJsonRes.message){  //prisla error sprava, nema zakazky
           Alert.alert(
             "Žiadne aktívne zákazky",
             "Momentálne nemáte zákazku",
@@ -53,7 +53,7 @@ export default function CustomerProfile({ navigation }) {
           return;
         }
 
-        navigation.navigate('TechnicianOrderHistory', {'': ordersJsonRes});
+        navigation.navigate('TechnicianOrderHistory', {'': oderHistoryJsonRes});
   
       } catch (error) {
         console.error(error);
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     fontSize: 30
   },
   button:{
-    marginTop: 35,
+    marginTop: 50,
     width: 250,
   }
 });

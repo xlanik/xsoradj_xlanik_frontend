@@ -78,7 +78,7 @@ export default function Register( {navigation}) {
       Keyboard.dismiss();
     }}>
       <View style={styles.container}>
-        <Text style={styles.name}> Vyplnte registráciu</Text>
+        <Text style={styles.name}> Vyplňte registráciu</Text>
 
         <TextInput style={styles.input} placeholder="Prihlasovacie meno*" onChangeText={(value) => setName(value)} />
         <TextInput style={styles.input} placeholder="Telefónne číslo*" keyboardType = 'numeric' onChangeText={(value) => setPhoneNumber(value)} />

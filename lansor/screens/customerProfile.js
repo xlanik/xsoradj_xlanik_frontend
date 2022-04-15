@@ -5,7 +5,7 @@ export default function CustomerProfile({ navigation }) {
 
   const customer = navigation.getParam('loginCustomer')
 
-  const pressHandlerDetails = () => {
+  const pressHandlerCarDetails = () => {
     navigation.navigate('CustomerCarDetails');
   }
 
@@ -22,26 +22,26 @@ export default function CustomerProfile({ navigation }) {
         <Text style={styles.name}> Vitajte {customer.name}</Text>
         <View style={styles.info}>
           <Text>Meno a priezvisko: </Text>
-          <Text>{customer.name}</Text>
+          <Text style={styles.baseText}>{customer.name}</Text>
         </View>
 
         <View style={styles.info}>
           <Text>Telefónne číslo: </Text>
-          <Text>{customer.phoneNumber}</Text>
+          <Text style={styles.baseText}>{customer.phoneNumber}</Text>
         </View>
 
         <View style={styles.info}>
           <Text>Email: </Text>
-          <Text>{customer.email}</Text>
+          <Text style={styles.baseText}>{customer.email}</Text>
         </View>
 
         <View style={styles.info}>
           <Text>Vaše heslo: </Text>
-          <Text>{customer.password}</Text>
+          <Text style={styles.baseText}>{customer.password}</Text>
         </View>
         
         <View style={styles.button}>
-          <Button title='Stav servisovaného vozidla' onPress={pressHandlerDetails} />
+          <Button title='Stav servisovaných vozidiel' onPress={pressHandlerCarDetails} />
         </View>
         <View style={styles.button}>
           <Button title='Objednať vozidlo do servisu' onPress={pressHandlerInitOrder} />
@@ -62,16 +62,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  baseText:{
+    fontWeight: "bold",
+  },
   info:{
     padding: 8,
     flexDirection: "row",
+    marginTop: 10,
+    borderColor: '#bbb',
+    borderWidth: 1,
+    borderRadius: 1,
+    borderRadius: 10,
+    backgroundColor: '#F7F7F7',
   },
   name:{
     fontWeight: 'bold',
-    fontSize: 24
+    fontSize: 35,
+    paddingBottom: 20
   },
   button:{
-    marginTop: 25,
+    marginTop: 30,
     width: 250,
   }
 });

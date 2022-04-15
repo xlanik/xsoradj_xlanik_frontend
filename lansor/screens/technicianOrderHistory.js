@@ -1,10 +1,35 @@
-import React from 'react';
-import { StyleSheet, View, Text, } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, FlatList, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import TechnicianHistoryItem from '../components/technicianHistoryItem';
 
-export default function TechnicianOrderHistory() {
+export default function TechnicianOrderHistory( {navigation} ) {
+  
+  const orderHistory = navigation.getParam('');
+
   return (
-    <View>
-      <Text>Bolo robenych 25 aut brasko</Text>
-    </View>
+    
+      <View style={styles.container}>
+        <View style={styles.list}>
+          <FlatList
+            data={orderHistory}
+            renderItem={({item}) => <TechnicianHistoryItem item={item}/>}
+            keyExtractor={(item, index) => index.toString()}
+          />
+          
+        </View>
+      </View>
+   
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  list: {
+    marginTop: 20,
+    maxWidth: 300,
+    paddingLeft:20
+  },
+});
