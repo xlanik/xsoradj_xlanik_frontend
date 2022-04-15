@@ -5,8 +5,31 @@ export default function CustomerProfile({ navigation }) {
 
   const customer = navigation.getParam('loginCustomer')
 
-  const pressHandlerCarDetails = () => {
-    navigation.navigate('CustomerCarDetails');
+  const pressHandlerCarDetails = async () => {
+    try {
+
+        const response = await fetch(`https://lansormtaa.herokuapp.com/CustomerCar/${customer._id}`);
+        const customersCarsJsonRes = await response.json();
+        //console.log(ordersJsonRes);
+        
+  
+        if(customersCarsJsonRes.message){  //prisla error sprava, nema zakazky
+          Alert.alert(
+            "Žiadne auto v servise",
+            "Momentálne nemáte autá u nás servisované.",
+            [
+              { text: "OK", onPress: () => console.log("Ziadne zakazky alert") }
+            ]
+          );
+
+          return;
+        }
+        
+        navigation.navigate('CustomerCarDetails', {'': customersCarsJsonRes});   //musi sa to zabalit do objektu....
+  
+      } catch (error) {
+        console.error(error);
+      }
   }
 
   const car ={
