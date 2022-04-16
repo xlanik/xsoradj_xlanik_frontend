@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Button, Switch, TextInput } from 'react-native';
+import { StyleSheet, View, Text, Button, Switch, TextInput, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 
 export default function CustomerServiceOptions({ navigation }) {
@@ -8,7 +8,7 @@ export default function CustomerServiceOptions({ navigation }) {
     const [filterChange, setFilterChange] = useState(false);
     const [tyreChange, setTyreChange] = useState(false);
     const [motorService, setMotorService] = useState(false);
-    const [description, setDescription] = useState('');
+    const [description, setDescription] = useState('nevyplnene');
 
     const toggleSwitchOil = () => setOilChange(previousState => !previousState);
     const toggleSwitchFilter = () => setFilterChange(previousState => !previousState);
@@ -17,6 +17,19 @@ export default function CustomerServiceOptions({ navigation }) {
 
 
     const pressHandlerOrders = () => {
+
+        if(!oilChange && !filterChange && !motorService && !tyreChange){
+          Alert.alert(
+            "Vyberte aspoň jeden úkon",
+            "V opačnom prípade vozidlo netreba servisovať.",
+            [
+              { text: "Rozumiem", onPress: () => console.log("Nevybral ukon ziadny") }
+            ]
+          );
+
+          return;
+        }
+
         const car = {
             customer_id : navigation.getParam("customer_id"),
             technician_id : navigation.getParam("technician_id"),
@@ -36,6 +49,9 @@ export default function CustomerServiceOptions({ navigation }) {
     
 
     return (
+      <TouchableWithoutFeedback onPress={() => {
+        Keyboard.dismiss();
+      }}>
         <View style={styles.container}>
          <View style={styles.checkboxContainer}>
            <View style={styles.option}>
@@ -93,6 +109,7 @@ export default function CustomerServiceOptions({ navigation }) {
             </View>
           </View>
         </View>
+        </TouchableWithoutFeedback>
 
           
     );

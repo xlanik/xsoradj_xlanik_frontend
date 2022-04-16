@@ -1,16 +1,32 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, Button,Text, Switch, Alert} from 'react-native';
+import React, { useState, Component  } from 'react';
+import { StyleSheet, View, TextInput, Button,Text, Switch, Alert, FlatList} from 'react-native';
+import TechnicianAvailableItem from '../components/technicianAvailableItem';
 
 export default function CustomerInitOrder({ navigation }) {
 
-    const [printTechnicians, setPrintTechnicians] = useState(false);
+    const technicians = null;
+    const [isEnabled, setIsEnabled] = useState(false);
     const [znacka, setZnacka] = useState('');
     const [model, setModel] = useState('');
     const [rokVyroby, setRokVyroby] = useState('');
     const [spz, setSpz] = useState('');
 
     const cust_id = navigation.getParam("customer_id");
-    
+
+    const toggleSwitch = async () => {
+        setIsEnabled(previousState => !previousState);
+        if(!technicians){
+            try{
+                const response = await fetch(`https://lansormtaa.herokuapp.com/technicians`);
+                const technicians = await response.json();
+                console.log(technicians);
+            
+            } catch (error) {
+                console.error(error);
+        }
+        }
+    };
+
     const pressHandlerOrders = async() => {
 
         if(!znacka || !model || !rokVyroby){
@@ -44,19 +60,21 @@ export default function CustomerInitOrder({ navigation }) {
         
     }
 
-    const pressHandleTechChoice = async () =>{
-        try{
+    const pressHandleTechChoice = async (item) =>{
+        /*try{
             const response = await fetch(`https://lansormtaa.herokuapp.com/technicians`);
             const techJsonRes = await response.json();
             //console.log(techJsonRes);
             setPrintTechnicians(true);
         } catch (error) {
             console.error(error);
-        }
+        }*/
+        console.log(item.name)
     };
 
     //{printTechnicians && <Text> Vypis technikov</Text>}   
     return (
+
         <View style={styles.container}>
             <Text style={styles.name}> Prosím zadajte údaje vozidla</Text>
             <TextInput style={styles.input} placeholder="Značka*" onChangeText={(value) => setZnacka(value)} />
@@ -66,14 +84,22 @@ export default function CustomerInitOrder({ navigation }) {
             <View style={styles.option}>
                 <Switch
                     trackColor={{ false: "#767577", true: "#81b0ff" }}
-                    thumbColor={printTechnicians ? "#f5dd4b" : "#f4f3f4"}
+                    thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
                     ios_backgroundColor="#3e3e3e"
-                    onValueChange={setPrintTechnicians}
-                    value={printTechnicians}
+                    onValueChange={toggleSwitch}
+                    value={isEnabled}
                 />
                 <Text style={styles.label}>Vybrať konkrétneho technika</Text>
             </View>
-            {printTechnicians == true ? <Text> Vypis technikov</Text> : null} 
+            {isEnabled == true ? 
+            <View style={styles.list}>
+                <FlatList
+                    data={technicians}
+                    renderItem={({item}) => <TechnicianAvailableItem item={item} pressHandleTechChoice={pressHandleTechChoice}/>}
+                    keyExtractor={(item, index) => index.toString()}
+                />
+            </View> 
+            : null} 
             <Button title='Pokračuj na úkony' onPress={pressHandlerOrders} />
         </View>
     );
@@ -109,6 +135,11 @@ const styles = StyleSheet.create({
         margin: 15,
         paddingLeft: 5,
         fontSize: 16
+    },
+    list: {
+        marginTop: 20,
+        maxWidth: 300,
+        paddingLeft:20
     },
   });
   

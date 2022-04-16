@@ -22,6 +22,18 @@ export default function CustomerImageUpload({ navigation }) {
 
   const pressHandlerOrders = async () => {
 
+    if(!image){
+      Alert.alert(
+        "Nahrajte fotogragiu auta",
+        "Je to povinná položka pri objednávke",
+        [
+          { text: "Rozumiem", onPress: () => console.log("Nedal fotografiu") }
+        ]
+      );
+
+      return;
+    }
+
     const car = {
       customer_id : navigation.getParam("customer_id"),
       technician_id : navigation.getParam("technician_id"),
@@ -59,7 +71,7 @@ export default function CustomerImageUpload({ navigation }) {
 
     Alert.alert(
         "Dokončené",
-        "Objednávka do servisu bola úspešná, budete presmerovaný na profil.",
+        "Objednávka do servisu bola úspešná, ste presmerovaný na profil.",
         [
           { text: "OK", onPress: () => console.log("OK Pressed") }
         ]
@@ -68,10 +80,37 @@ export default function CustomerImageUpload({ navigation }) {
   }
 
     return (
-        <View>
-        <Button title='Objednat vozidlo do servisu' onPress={pressHandlerOrders} />
-        <Button title="Pick an image from camera roll" onPress={handleChoosePhoto} />
-        {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+        <View style={styles.container}>
+
+          <View style={styles.button}>
+            <Button title="Nahrať obrázok" onPress={handleChoosePhoto} />
+          </View>
+
+          <View style={styles.button}>
+            <Button  title='Objednať vozidlo do servisu' onPress={pressHandlerOrders} />
+          </View>
+
+          {image && 
+          <><Text style={styles.name}>Fotografia auta</Text><Image source={{ uri: image }} style={{ width: 300, height: 200 }} /></>}
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+  container:{
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  
+  },
+  name:{
+    fontWeight: 'bold',
+    fontSize: 30,
+  },
+  button:{
+    marginTop: 35,
+    width: 200,
+    marginBottom: 20
+  }
+});

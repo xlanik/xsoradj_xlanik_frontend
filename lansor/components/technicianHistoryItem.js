@@ -9,7 +9,7 @@ export default function TechnicianHistoryItem({ item }) {
   //console.log(base64Image);
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{uri: `data:image/png;base64,${base64Image}`}} />
+      <Image source={{ uri: item.image_url }} style={{ width: 200, height: 150 }} />
       <Text style={styles.item}>Značka: {item.brand}</Text>
       <Text style={styles.item}>Model: {item.model}</Text>
       <Text style={styles.item}>Rok výroby: {item.year}</Text>
