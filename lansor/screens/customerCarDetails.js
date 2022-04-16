@@ -59,6 +59,8 @@ export default function CustomerCarDetails( {navigation} ) {
       console.error(error);
     }
 
+    navigation.navigate('CustomerProfile');
+    
     return;
   }
 
