@@ -67,6 +67,7 @@ export default function CustomerProfile({ navigation }) {
   return (
     <View style={styles.container}>
         <Text style={styles.name}> Vitajte {technician.name}</Text>
+        <Text> Vaše identifikačné číslo: {technician._id.slice(-5)}</Text>
         
         <View style={styles.button}>
           <Button title='Moje zákazky' onPress={pressHandlerOdrders} />
@@ -96,7 +97,8 @@ const styles = StyleSheet.create({
   },
   name:{
     fontWeight: 'bold',
-    fontSize: 30
+    fontSize: 30,
+    marginBottom: 15,
   },
   button:{
     marginTop: 50,

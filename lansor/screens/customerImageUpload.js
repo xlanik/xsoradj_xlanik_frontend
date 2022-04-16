@@ -59,12 +59,12 @@ export default function CustomerImageUpload({ navigation }) {
       body: JSON.stringify(car)
     }
 
-    console.log(postObj);
+    //console.log(postObj);
 
     try {
       const response = await fetch(`https://lansormtaa.herokuapp.com/cars`, postObj);
       const carJsonRes = await response.json();
-      console.log(carJsonRes);
+      //console.log(carJsonRes);
     } catch (error) {
       console.error(error);
     }
@@ -91,7 +91,7 @@ export default function CustomerImageUpload({ navigation }) {
           </View>
 
           {image && 
-          <><Text style={styles.name}>Fotografia auta</Text><Image source={{ uri: image }} style={{ width: 300, height: 200 }} /></>}
+          <><Text style={styles.name}>Fotografia auta</Text><Image source={{ uri: image }} style={styles.image} /></>}
         </View>
     );
 }
@@ -112,5 +112,11 @@ const styles = StyleSheet.create({
     marginTop: 35,
     width: 200,
     marginBottom: 20
-  }
+  },
+  image: {
+    width: 300, 
+    height: 200,
+    resizeMode: "contain",
+    borderRadius: 5,
+  },
 });

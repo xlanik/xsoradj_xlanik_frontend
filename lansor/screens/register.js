@@ -46,7 +46,7 @@ export default function Register( {navigation}) {
 
       const response = await fetch(`https://lansormtaa.herokuapp.com/Customers`, fetchObj);
       const userJsonRes = await response.json();
-      console.log(userJsonRes);
+      console.log(userJsonRes.message);
 
       if(userJsonRes.name) {  //staci ked vrati menoa  viem, ze prebehla okej
         Alert.alert(
@@ -59,6 +59,7 @@ export default function Register( {navigation}) {
         navigation.navigate('Login', userJsonRes);
       } 
       if(userJsonRes.message){
+        console.log("som tu")
         Alert.alert(
           "Neúspešná registrácia",
           userJsonRes.message,

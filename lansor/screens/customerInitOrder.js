@@ -1,33 +1,53 @@
-import React, { useState, Component  } from 'react';
-import { StyleSheet, View, TextInput, Button,Text, Switch, Alert, FlatList} from 'react-native';
+import React, { useState, useEffect  } from 'react';
+import { StyleSheet, View, TextInput, Button,Text, Switch, Alert, FlatList, ScrollView, StatusBar, SafeAreaView, LogBox } from 'react-native';
 import TechnicianAvailableItem from '../components/technicianAvailableItem';
 
 export default function CustomerInitOrder({ navigation }) {
 
-    const technicians = null;
+    const [technicians, setTechnicians] = useState(null)
     const [isEnabled, setIsEnabled] = useState(false);
     const [znacka, setZnacka] = useState('');
     const [model, setModel] = useState('');
     const [rokVyroby, setRokVyroby] = useState('');
     const [spz, setSpz] = useState('');
+    const [technicianID, setTechnicianID] = useState('');
+    const [technicianName, setTechnicianName] = useState('náhodný');
+
 
     const cust_id = navigation.getParam("customer_id");
 
-    const toggleSwitch = async () => {
-        setIsEnabled(previousState => !previousState);
-        if(!technicians){
+    //https://stackoverflow.com/questions/53332321/react-hook-warnings-for-async-function-in-useeffect-useeffect-function-must-ret
+    useEffect(() => {
+        LogBox.ignoreLogs(['VirtualizedLists should never be nested']);     //https://stackoverflow.com/questions/58243680/react-native-another-virtualizedlist-backed-container
+        async function fetchTechnicians() {
             try{
-                const response = await fetch(`https://lansormtaa.herokuapp.com/technicians`);
-                const technicians = await response.json();
-                console.log(technicians);
-            
+                let response = await fetch(`https://lansormtaa.herokuapp.com/technicians`)
+                response = await response.json()
+                //console.log(response);
+                setTechnicians(response);
+                
             } catch (error) {
                 console.error(error);
+            }
+
         }
-        }
+        fetchTechnicians();
+        
+      }, [])
+
+      useEffect(() => {
+        if(isEnabled == false){
+            setTechnicianID('');
+            setTechnicianName("náhodný");
+        }   
+      }, [isEnabled])
+
+    const toggleSwitch = async () => {
+        setIsEnabled(previousState => !previousState);
+        //console.log(technicians);
     };
 
-    const pressHandlerOrders = async() => {
+    const pressHandlerOrders = () => {
 
         if(!znacka || !model || !rokVyroby){
             Alert.alert(
@@ -41,67 +61,60 @@ export default function CustomerInitOrder({ navigation }) {
               return;
         }
 
-        try{
-            const response = await fetch(`https://lansormtaa.herokuapp.com/technicians`);
-            const techJsonRes = await response.json();
-            //console.log(techJsonRes);
-            const car = {
-                customer_id : cust_id,
-                technician_id : techJsonRes[Math.floor(Math.random() * techJsonRes.length)]._id,
-                brand : znacka,
-                model : model,
-                year : rokVyroby,
-                number_plate: spz,
-            }
-            navigation.navigate('CustomerServiceOptions',car);
-        } catch (error) {
-            console.error(error);
+        const car = {
+            customer_id : cust_id,
+            technician_id : isEnabled ? technicianID : technicians[Math.floor(Math.random() * technicians.length)]._id,
+            brand : znacka,
+            model : model,
+            year : rokVyroby,
+            number_plate: spz,
         }
-        
+
+        console.log(car);
+        navigation.navigate('CustomerServiceOptions',car);
     }
 
     const pressHandleTechChoice = async (item) =>{
-        /*try{
-            const response = await fetch(`https://lansormtaa.herokuapp.com/technicians`);
-            const techJsonRes = await response.json();
-            //console.log(techJsonRes);
-            setPrintTechnicians(true);
-        } catch (error) {
-            console.error(error);
-        }*/
-        console.log(item.name)
+        setTechnicianID(item._id);
+        setTechnicianName(item.name);
+        console.log(item)
     };
 
     //{printTechnicians && <Text> Vypis technikov</Text>}   
     return (
 
-        <View style={styles.container}>
-            <Text style={styles.name}> Prosím zadajte údaje vozidla</Text>
-            <TextInput style={styles.input} placeholder="Značka*" onChangeText={(value) => setZnacka(value)} />
-            <TextInput style={styles.input} placeholder="Model*" onChangeText={(value) => setModel(value)} />
-            <TextInput style={styles.input} placeholder="Rok výroby*" keyboardType = 'numeric' onChangeText={(value) => setRokVyroby(value)} /> 
-            <TextInput style={styles.input} placeholder="ŠPZ*" onChangeText={(value) => setSpz(value)} />
-            <View style={styles.option}>
-                <Switch
-                    trackColor={{ false: "#767577", true: "#81b0ff" }}
-                    thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-                    ios_backgroundColor="#3e3e3e"
-                    onValueChange={toggleSwitch}
-                    value={isEnabled}
-                />
-                <Text style={styles.label}>Vybrať konkrétneho technika</Text>
-            </View>
-            {isEnabled == true ? 
-            <View style={styles.list}>
-                <FlatList
-                    data={technicians}
-                    renderItem={({item}) => <TechnicianAvailableItem item={item} pressHandleTechChoice={pressHandleTechChoice}/>}
-                    keyExtractor={(item, index) => index.toString()}
-                />
-            </View> 
-            : null} 
-            <Button title='Pokračuj na úkony' onPress={pressHandlerOrders} />
-        </View>
+        <SafeAreaView style={styles.container}>
+            <ScrollView>
+                <Text style={styles.name}> Prosím zadajte údaje vozidla</Text>
+                <TextInput style={styles.input} placeholder="Značka*" onChangeText={(value) => setZnacka(value)} />
+                <TextInput style={styles.input} placeholder="Model*" onChangeText={(value) => setModel(value)} />
+                <TextInput style={styles.input} placeholder="Rok výroby*" keyboardType = 'numeric' onChangeText={(value) => setRokVyroby(value)} /> 
+                <TextInput style={styles.input} placeholder="ŠPZ*" onChangeText={(value) => setSpz(value)} />
+                <View style={styles.button}>
+                    <Button title='Pokračuj na úkony' onPress={pressHandlerOrders} />
+                </View>
+                <View style={styles.option}>
+                    <Switch
+                        trackColor={{ false: "#767577", true: "#81b0ff" }}
+                        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+                        ios_backgroundColor="#3e3e3e"
+                        onValueChange={toggleSwitch}
+                        value={isEnabled}
+                    />
+                    <Text style={styles.label}>Vybrať konkrétneho technika</Text>
+                </View>
+                <Text style={styles.label}>Zvoleny technik: {technicianName} {technicianID.slice(-5)}</Text>
+                {isEnabled == true ? 
+                <View style={styles.list}>
+                    <FlatList
+                        data={technicians}
+                        renderItem={({item}) => <TechnicianAvailableItem item={item} pressHandleTechChoice={pressHandleTechChoice}/>}
+                        keyExtractor={(item, index) => index.toString()}
+                    />
+                </View>
+                : null} 
+            </ScrollView>
+        </SafeAreaView>
     );
     
 }
@@ -112,7 +125,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
-    
+      paddingTop: StatusBar.currentHeight,
     },
     name:{
       fontWeight: 'bold',
@@ -124,9 +137,6 @@ const styles = StyleSheet.create({
       padding: 8,
       marginTop: 25,
       width: 150,
-    },
-    button:{
-      marginTop: 25
     },
     option:{
         flexDirection: "row"
@@ -140,6 +150,10 @@ const styles = StyleSheet.create({
         marginTop: 20,
         maxWidth: 300,
         paddingLeft:20
+    },
+    button:{
+        marginTop: 35,
+        width: 200,
     },
   });
   

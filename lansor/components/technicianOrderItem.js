@@ -7,10 +7,10 @@ export default function TechnicianOrderItem({ pressHandlerRepaired, item }) {
 
   var serviceActions = 'Potrebné úkony: ';
   var carState = "Potvrdiť dokončenie servisu";
-  if(item.oilChange) serviceActions = serviceActions + '- výmena oleja - ';
-  if(item.filterChange) serviceActions = serviceActions + '- výmena filtrov -';
-  if(item.tireChange) serviceActions = serviceActions + '- prezutie pneu -';
-  if(item.engineService) serviceActions = serviceActions + '- servis motora -';
+  if(item.oilChange) serviceActions = serviceActions + '| výmena oleja |';
+  if(item.filterChange) serviceActions = serviceActions + '| výmena filtrov |';
+  if(item.tireChange) serviceActions = serviceActions + '| prezutie pneu |';
+  if(item.engineService) serviceActions = serviceActions + '| servis motora |';
   if(item.state == "repaired") carState = "Vyservisované, čaká sa na potvrdenie zákazníka"
   const base64Image = item.image_url;
   //console.log(base64Image);
@@ -18,11 +18,11 @@ export default function TechnicianOrderItem({ pressHandlerRepaired, item }) {
   return (
   
     <View style={styles.container}>
-      <Image source={{ uri: item.image_url }} style={{ width: 200, height: 150 }} />
-      <Text style={styles.item}>Značka: {item.brand}</Text>
-      <Text style={styles.item}>Model: {item.model}</Text>
+      <Text style={styles.name}>{item.brand} {item.model}</Text>
+      <Image source={{ uri: item.image_url }} style={styles.image} />
       <Text style={styles.item}>Rok výroby: {item.year}</Text>
       <Text style={styles.item}>Ev. číslo: {item.number_plate}</Text>
+      <Text style={styles.item}>Info: {item.description}</Text>
       <Text style={styles.item}>{serviceActions}</Text>
       <TextInput
         multiline 
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: '#bbb',
-    borderWidth: 3,
+    borderWidth: 1,
     padding: 30,
   },
   item: {
@@ -58,11 +58,10 @@ const styles = StyleSheet.create({
     
   },
   image: {
-    width: 50, 
-    height: 50,
-    borderWidth: 1, 
-    borderColor: 'red',
+    width: 200, 
+    height: 150,
     resizeMode: "contain",
+    borderRadius: 5,
   },
   itemConfirm:{
     padding: 16,
@@ -79,5 +78,10 @@ const styles = StyleSheet.create({
     padding: 8,
     margin: 10,
     width: 200,
-  }
+  },
+  name:{
+    fontWeight: 'bold',
+    fontSize: 25,
+    marginBottom: 5,
+  },
 });

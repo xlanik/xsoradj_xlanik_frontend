@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Button, TextInput, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 export default function Login({ navigation }) {
@@ -48,6 +48,8 @@ export default function Login({ navigation }) {
     } catch (error) {
       console.error(error);
     }
+
+    return;
   }
 
   return (
@@ -57,8 +59,8 @@ export default function Login({ navigation }) {
       <View style={styles.container}>
         <Text style={styles.name}> Autoservis Lansor</Text>
 
-        <TextInput style={styles.input} placeholder="Prihlasovacie meno" onChangeText={(value) => setName(value)} />
-        <TextInput style={styles.input} placeholder="Heslo" onChangeText={(value) => setPassword(value)} secureTextEntry={true} />
+        <TextInput style={styles.input} placeholder="Prihlasovacie meno"  onChangeText={(value) => setName(value)} />
+        <TextInput style={styles.input} placeholder="Heslo"   onChangeText={(value) => setPassword(value)} secureTextEntry={true} />
         <View style={styles.button}>
           <Button title='Prihlásiť sa' onPress={pressLoginHandle} />
         </View>
@@ -76,7 +78,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  
   },
   name:{
     fontWeight: 'bold',

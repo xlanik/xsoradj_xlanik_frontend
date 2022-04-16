@@ -6,10 +6,9 @@ export default function TechnicianAvailableItem({pressHandleTechChoice, item }) 
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => pressHandleTechChoice(item)}>
-        <Text style={styles.item}>{item.name}</Text>
+        <Text style={styles.item}>{item.name} - ID: {item._id.slice(-5)}</Text>
       </TouchableOpacity>
     </View>
-     
   )
 }
 
@@ -31,6 +30,5 @@ const styles = StyleSheet.create({
     borderRadius: 1,
     borderRadius: 10,
     backgroundColor: '#F7F7F7',
-    
   },
 });

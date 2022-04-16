@@ -43,6 +43,9 @@ export default function CustomerServiceOptions({ navigation }) {
             motorService : motorService,
             description: description
         }
+
+        //console.log(car);
+
         navigation.navigate('CustomerImageUpload',car);
     }
 

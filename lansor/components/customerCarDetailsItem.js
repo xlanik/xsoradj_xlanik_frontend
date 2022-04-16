@@ -2,11 +2,6 @@ import React, {isValidElement, useState} from 'react'
 import {StyleSheet, TouchableOpacity, Text, View, Image, Button} from 'react-native';
 
 export default function TechnicianOrderItem({ pressHandlerConfirmCar, item }) {
-  
-  const [desc, setDesc] = useState('');
-
-  const base64Image = item.image_url;
-  //console.log(base64Image);
 
   const pressHandlerVideoCall = () => {
 
@@ -15,13 +10,12 @@ export default function TechnicianOrderItem({ pressHandlerConfirmCar, item }) {
   return (
   
     <View style={styles.container}>
-      <Image source={{ uri: item.image_url }} style={{ width: 200, height: 150 }} />
-      <Text style={styles.item}>Značka: {item.brand}</Text>
-      <Text style={styles.item}>Model: {item.model}</Text>
+      <Text style={styles.name}>{item.brand} {item.model}</Text>
+      <Image source={{ uri: item.image_url }} style={styles.image} />
       <Text style={styles.item}>Rok výroby: {item.year}</Text>
       <Text style={styles.item}>Ev. číslo: {item.number_plate}</Text>
       <Text style={styles.item}>Popis zákazky: {item.description}</Text>
-      <Text style={styles.item}>ID Technika: {item.technician_id}</Text>
+      <Text style={styles.item}>Identifikačné číslo technika: {item.technician_id.slice(-5)}</Text>
 
       {item.state == "repaired" ? 
       <TouchableOpacity onPress={() => pressHandlerConfirmCar(item)}>
@@ -44,8 +38,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: '#bbb',
-    borderWidth: 3,
-    padding: 30,
+    borderWidth: 1,
+    padding: 20,
+  },
+  name:{
+    fontWeight: 'bold',
+    fontSize: 25,
+    marginBottom: 5,
   },
   item: {
     padding: 16,
@@ -58,11 +57,10 @@ const styles = StyleSheet.create({
     
   },
   image: {
-    width: 50, 
-    height: 50,
-    borderWidth: 1, 
-    borderColor: 'red',
+    width: 200, 
+    height: 150,
     resizeMode: "contain",
+    borderRadius: 5,
   },
   itemConfirm:{
     padding: 16,

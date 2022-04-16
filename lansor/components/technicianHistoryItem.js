@@ -2,20 +2,20 @@ import React, {useState} from 'react'
 import {StyleSheet, Text, View, Image} from 'react-native';
 
 export default function TechnicianHistoryItem({ item }) {
-  const base64Image = item.image_url;
+  
 
     var formatedDate = item.last_service.slice(0, 10);
-    console.log(formatedDate);
-  //console.log(base64Image);
+    //console.log(formatedDate);
+  
   return (
     <View style={styles.container}>
-      <Image source={{ uri: item.image_url }} style={{ width: 200, height: 150 }} />
-      <Text style={styles.item}>Značka: {item.brand}</Text>
-      <Text style={styles.item}>Model: {item.model}</Text>
+      <Text style={styles.name}>{item.brand} {item.model}</Text>
+      <Image source={{ uri: item.image_url }} style={styles.image} />
       <Text style={styles.item}>Rok výroby: {item.year}</Text>
       <Text style={styles.item}>Ev. číslo: {item.number_plate}</Text>
       <Text style={styles.item}>Informácie: {item.description}</Text>
       <Text style={styles.item}>Posledný servis: {formatedDate}</Text>
+      <Text style={styles.item}>Servis vykonal: {item.technician_id.slice(-5)}</Text>
     </View>
      
   )
@@ -28,8 +28,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: '#bbb',
-    borderWidth: 3,
+    borderWidth: 1,
     padding: 30,
+  },
+  name:{
+    fontWeight: 'bold',
+    fontSize: 25,
+    marginBottom: 5,
   },
   item: {
     padding: 16,
@@ -42,10 +47,9 @@ const styles = StyleSheet.create({
     
   },
   image: {
-    width: 50, 
-    height: 50,
-    borderWidth: 1, 
-    borderColor: 'red',
+    width: 200, 
+    height: 150,
     resizeMode: "contain",
+    borderRadius: 5,
   }
 });
