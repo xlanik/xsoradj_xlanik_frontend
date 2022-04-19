@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import { StyleSheet, View, Text, Button, TextInput, TouchableWithoutFeedback, Alert, Keyboard, Image } from 'react-native';
+import NormalButton from '../components/normalButton';
+import ConfirmButton from '../components/confirmButton';
 
 export default function Register( {navigation}) {
 
@@ -86,12 +88,9 @@ export default function Register( {navigation}) {
         <TextInput style={styles.input} placeholder="Telefónne číslo*" keyboardType = 'numeric' onChangeText={(value) => setPhoneNumber(value)} />
         <TextInput style={styles.input} placeholder="Email*" onChangeText={(value) => setEmail(value)} />
         <TextInput style={styles.input} placeholder="Heslo*" onChangeText={(value) => setPassword(value)} secureTextEntry={true} />
-        <View style={styles.button}>
-          <Button title='Registrovať sa' onPress={pressHandlerRegister} />
-        </View>
-        <View style={styles.button}>
-          <Button title='Späť na úvodnú stránku' onPress={pressHandlerBack} />
-        </View>
+        <ConfirmButton title={'Registrovať sa'} onPress={pressHandlerRegister}></ConfirmButton>
+        <NormalButton title={'Späť na úvod'} onPress={pressHandlerBack}></NormalButton>
+        
       </View>
     </TouchableWithoutFeedback>
   );
@@ -116,10 +115,6 @@ export default function Register( {navigation}) {
       backgroundColor: '#fff',
       padding: 8,
       marginTop: 15,
-      width: 200,
-    },
-    button:{
-      marginTop: 20,
       width: 200,
     },
     logo:{

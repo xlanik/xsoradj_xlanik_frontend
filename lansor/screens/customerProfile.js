@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, Button, Alert} from 'react-native';
+import NormalButton from '../components/normalButton';
+import ConfirmButton from '../components/confirmButton';
 
 export default function CustomerProfile({ navigation }) {
 
@@ -66,17 +68,11 @@ export default function CustomerProfile({ navigation }) {
           <Text>Vaše heslo: </Text>
           <Text style={styles.baseText}>{customer.password}</Text>
         </View>
-        
-        <View style={styles.button}>
-          <Button title='Stav servisovaných vozidiel' onPress={pressHandlerCarDetails} />
-        </View>
-        <View style={styles.button}>
-          <Button title='Objednať vozidlo do servisu' onPress={pressHandlerInitOrder} />
-        </View>
 
-        <View style={styles.button}>
-          <Button title='Odhlásiť sa' onPress={pressHandlerLogout} />
-        </View>
+        <ConfirmButton title={'Objednávka do servisu'} onPress={pressHandlerInitOrder}></ConfirmButton>
+        <NormalButton title={'Stav vozidiel v servise'} onPress={pressHandlerCarDetails}></NormalButton>
+        <NormalButton title={'Odhlásiť sa'} onPress={pressHandlerLogout}></NormalButton>
+      
       </View>
   );
 }
@@ -110,5 +106,5 @@ const styles = StyleSheet.create({
   button:{
     marginTop: 30,
     width: 250,
-  }
+  },
 });

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Button, TextInput, Alert, TouchableWithoutFeedback, Keyboard, Image } from 'react-native';
+import NormalButton from '../components/normalButton';
+import ConfirmButton from '../components/confirmButton';
 
 export default function Login({ navigation }) {
 
@@ -58,16 +60,12 @@ export default function Login({ navigation }) {
     }}>
       <View style={styles.container}>
         <Image style={styles.logo} source={require('../logo.png')} />
-        <Text style={styles.name}> Autoservis Lansor</Text>
+        <Text style={styles.name}> Autoservis LanSor</Text>
 
         <TextInput style={styles.input} placeholder="Prihlasovacie meno"  onChangeText={(value) => setName(value)} />
         <TextInput style={styles.input} placeholder="Heslo"   onChangeText={(value) => setPassword(value)} secureTextEntry={true} />
-        <View style={styles.button}>
-          <Button title='Prihlásiť sa' onPress={pressLoginHandle} />
-        </View>
-        <View style={styles.button}>
-          <Button title='Registrácia' onPress={pressHandlerRegister} />
-        </View>
+        <ConfirmButton title={'Prihlásiť sa'} onPress={pressLoginHandle}></ConfirmButton>
+        <NormalButton title={'Registrácia'} onPress={pressHandlerRegister}></NormalButton>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -89,10 +87,6 @@ const styles = StyleSheet.create({
     borderColor: '#C9C8C7',
     backgroundColor: '#fff',
     padding: 8,
-    marginTop: 30,
-    width: 200,
-  },
-  button:{
     marginTop: 30,
     width: 200,
   },
