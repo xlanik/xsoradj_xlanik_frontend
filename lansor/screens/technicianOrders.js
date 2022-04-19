@@ -41,8 +41,7 @@ export default function TechnicianOrders( {navigation} ) {
   const pressHandlerRepaired = (item, description) => {
 
     if(description == "") description = `Technik ${item.name} nevyplnil údaje o aute`;
-    //console.log(item._id);
-
+    
     if(item.state == "repaired"){
       Alert.alert(
         "Upozornenie",

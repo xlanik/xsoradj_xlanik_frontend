@@ -5,8 +5,7 @@ export default function TechnicianHistoryItem({ item }) {
   
 
     var formatedDate = item.last_service.slice(0, 10);
-    //console.log(formatedDate);
-  
+  //Výpis jedného z technikových už vyservisovaných vozidiel 
   return (
     <View style={styles.container}>
       <Text style={styles.name}>{item.brand} {item.model}</Text>

@@ -34,7 +34,7 @@ export default function Login({ navigation }) {
       const userJsonRes = await response.json();
       console.log(userJsonRes);
      
-
+      //Zistenie podla udajov, ci pokracujeme ako customer alebo technik, alebo boli nespravne udaje
       if(userJsonRes.loginCustomer) navigation.navigate('CustomerProfile', userJsonRes);
       if(userJsonRes.loginTechnician) navigation.navigate('TechnicianProfile', userJsonRes);
       if(userJsonRes.message){

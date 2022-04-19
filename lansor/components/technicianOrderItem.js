@@ -12,9 +12,8 @@ export default function TechnicianOrderItem({ pressHandlerRepaired, item }) {
   if(item.tireChange) serviceActions = serviceActions + '| prezutie pneu |';
   if(item.engineService) serviceActions = serviceActions + '| servis motora |';
   if(item.state == "repaired") carState = "Vyservisované, čaká sa na potvrdenie zákazníka"
-  const base64Image = item.image_url;
-  //console.log(base64Image);
 
+  //Výpis jedného z technikových aktuálne servisovaných vozidiel 
   return (
   
     <View style={styles.container}>

@@ -6,6 +6,7 @@ export default function TechnicianOrderHistory( {navigation} ) {
   
   const orderHistory = navigation.getParam('');
 
+  //pomocou flat listu vypíšeme všetky komponenty - teda technikovu históriu vozidiel
   return (
     
       <View style={styles.container}>

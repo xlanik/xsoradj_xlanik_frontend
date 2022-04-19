@@ -6,6 +6,8 @@ export default function CustomerImageUpload({ navigation }) {
 
   const [image, setImage] = useState(null);
 
+  //Fotku hned po zvoleni zobrazime, a posleme ju do databazy uz v tvare base64
+  //ispiracia s https://docs.expo.dev/versions/latest/sdk/imagepicker/
   const handleChoosePhoto = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -58,12 +60,10 @@ export default function CustomerImageUpload({ navigation }) {
       body: JSON.stringify(car)
     }
 
-    //console.log(postObj);
 
     try {
       const response = await fetch(`https://lansormtaa.herokuapp.com/cars`, postObj);
       const carJsonRes = await response.json();
-      //console.log(carJsonRes);
     } catch (error) {
       console.error(error);
     }

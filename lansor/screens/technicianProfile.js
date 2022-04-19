@@ -11,7 +11,6 @@ export default function CustomerProfile({ navigation }) {
 
         const response = await fetch(`https://lansormtaa.herokuapp.com/TechnicianCars/${technician._id}`);
         const ordersJsonRes = await response.json();
-        //console.log(ordersJsonRes);
         
   
         if(ordersJsonRes.message){  //prisla error sprava, nema zakazky
@@ -38,7 +37,6 @@ export default function CustomerProfile({ navigation }) {
 
         const response = await fetch(`https://lansormtaa.herokuapp.com/RepairedCars`);
         const oderHistoryJsonRes = await response.json();
-        //console.log(oderHistoryJsonRes);
        
   
         if(oderHistoryJsonRes.message){  //prisla error sprava, nema zakazky

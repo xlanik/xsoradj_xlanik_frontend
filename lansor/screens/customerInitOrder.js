@@ -35,6 +35,7 @@ export default function CustomerInitOrder({ navigation }) {
         
       }, [])
 
+      //ak nezvolime technika, bude vybrany nahodny
       useEffect(() => {
         if(isEnabled == false){
             setTechnicianID('');
@@ -44,7 +45,6 @@ export default function CustomerInitOrder({ navigation }) {
 
     const toggleSwitch = async () => {
         setIsEnabled(previousState => !previousState);
-        //console.log(technicians);
     };
 
     const pressHandlerOrders = () => {
@@ -61,9 +61,10 @@ export default function CustomerInitOrder({ navigation }) {
               return;
         }
 
+        //ak sme nevybrali konkretneho technika , tak zvolime nahodneho
         const car = {
             customer_id : cust_id,
-            technician_id : isEnabled ? technicianID : technicians[Math.floor(Math.random() * technicians.length)]._id,
+            technician_id : isEnabled ? technicianID : technicians[Math.floor(Math.random() * technicians.length)]._id, 
             brand : znacka,
             model : model,
             year : rokVyroby,
@@ -80,7 +81,7 @@ export default function CustomerInitOrder({ navigation }) {
         console.log(item)
     };
 
-    //{printTechnicians && <Text> Vypis technikov</Text>}   
+    //ak je switch enabled, vypíšu sa jednotliví technici
     return (
 
         <SafeAreaView style={styles.container}>

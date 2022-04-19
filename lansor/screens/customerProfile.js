@@ -12,7 +12,6 @@ export default function CustomerProfile({ navigation }) {
 
         const response = await fetch(`https://lansormtaa.herokuapp.com/CustomerCar/${customer._id}`);
         const customersCarsJsonRes = await response.json();
-        //console.log(ordersJsonRes);
         
   
         if(customersCarsJsonRes.message){  //prisla error sprava, nema zakazky
@@ -34,6 +33,7 @@ export default function CustomerProfile({ navigation }) {
       }
   }
 
+  //vytvorenie objektu, kedze ako parameter sa daju posielat iba objekty
   const cust_id ={
     customer_id:customer._id,
   }
@@ -42,7 +42,7 @@ export default function CustomerProfile({ navigation }) {
     navigation.navigate('CustomerInitOrder',cust_id);
   }
 
-  const pressHandlerLogout = () => {  //skuska na tie data
+  const pressHandlerLogout = () => {  
     navigation.navigate('Login');
   }
 

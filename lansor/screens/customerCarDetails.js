@@ -38,8 +38,6 @@ export default function CustomerCarDetails( {navigation} ) {
       image_url : car.image_url
     }
 
-    //console.log(repairedCar);
-
     const postObj= {
       method: 'POST',
       headers: {
@@ -49,7 +47,6 @@ export default function CustomerCarDetails( {navigation} ) {
       body: JSON.stringify(repairedCar)
     }
 
-    //console.log(postObj);
     
     try {
       const response = await fetch(`https://lansormtaa.herokuapp.com/RepairedCars`, postObj);
@@ -65,7 +62,6 @@ export default function CustomerCarDetails( {navigation} ) {
   }
 
   const pressHandlerConfirmCar = (item) => {
-    //console.log(item._id);
 
     Alert.alert(
       "Potvrdenie prevzatia",
@@ -79,6 +75,7 @@ export default function CustomerCarDetails( {navigation} ) {
     return;
   };
 
+  //pomocou flat listu vypisujeme vsetky auta, ktore ma zakaznik v servise
   return (
     
       <View style={styles.container}>
