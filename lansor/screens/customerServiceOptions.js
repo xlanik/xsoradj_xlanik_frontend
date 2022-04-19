@@ -123,9 +123,10 @@ const styles = StyleSheet.create({
       flex: 1,
       alignItems: "center",
       justifyContent: "center",
+      backgroundColor: "#D5E2EB",
     },
     option:{
-      flexDirection: "row"
+      flexDirection: "row",
     },
     checkboxContainer: {
       flexDirection: "column",
@@ -137,10 +138,12 @@ const styles = StyleSheet.create({
     input: {
       borderWidth: 1,
       borderColor: '#777',
-      padding: 8,
+      padding: 15,
       margin: 10,
-      width: 250,
-      height: 70
+      width: 280,
+      height: 100,
+      backgroundColor: "#fff",
+      borderRadius: 20,
     },
     label: {
       margin: 15,
@@ -149,7 +152,7 @@ const styles = StyleSheet.create({
     },
     button:{
       marginTop: 50,
-      width: 250,
+      width: 280,
     }
   });
   

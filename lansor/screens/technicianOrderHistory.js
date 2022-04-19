@@ -25,11 +25,11 @@ export default function TechnicianOrderHistory( {navigation} ) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#D5E2EB',
   },
   list: {
     marginTop: 20,
-    maxWidth: 300,
-    paddingLeft:20
+    maxWidth: 350,
+    paddingLeft: 10
   },
 });

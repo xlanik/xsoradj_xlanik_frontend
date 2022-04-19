@@ -24,7 +24,7 @@ export default function TechnicianHistoryItem({ item }) {
 const styles = StyleSheet.create({
   container:{
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#D5E2EB',
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: '#bbb',

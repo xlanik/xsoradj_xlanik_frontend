@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Button, TextInput, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { StyleSheet, View, Text, Button, TextInput, Alert, TouchableWithoutFeedback, Keyboard, Image } from 'react-native';
 
 export default function Login({ navigation }) {
 
@@ -57,6 +57,7 @@ export default function Login({ navigation }) {
       Keyboard.dismiss();
     }}>
       <View style={styles.container}>
+        <Image style={styles.logo} source={require('../logo.png')} />
         <Text style={styles.name}> Autoservis Lansor</Text>
 
         <TextInput style={styles.input} placeholder="Prihlasovacie meno"  onChangeText={(value) => setName(value)} />
@@ -75,23 +76,28 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
   container:{
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#D5E2EB',
     alignItems: 'center',
     justifyContent: 'center',
   },
   name:{
     fontWeight: 'bold',
-    fontSize: 35
+    fontSize: 30
   },
   input:{
     borderWidth: 1,
     borderColor: '#C9C8C7',
+    backgroundColor: '#fff',
     padding: 8,
-    marginTop: 35,
+    marginTop: 30,
     width: 200,
   },
   button:{
-    marginTop: 35,
+    marginTop: 30,
     width: 200,
-  }
+  },
+  logo:{
+    height: 120,
+    width: 140,
+  },
 });

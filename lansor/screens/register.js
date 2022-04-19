@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, Text, Button, TextInput, TouchableWithoutFeedback, Alert, Keyboard } from 'react-native';
+import { StyleSheet, View, Text, Button, TextInput, TouchableWithoutFeedback, Alert, Keyboard, Image } from 'react-native';
 
 export default function Register( {navigation}) {
 
@@ -79,6 +79,7 @@ export default function Register( {navigation}) {
       Keyboard.dismiss();
     }}>
       <View style={styles.container}>
+        <Image style={styles.logo} source={require('../logo.png')} />
         <Text style={styles.name}> Vyplňte registráciu</Text>
 
         <TextInput style={styles.input} placeholder="Prihlasovacie meno*" onChangeText={(value) => setName(value)} />
@@ -100,26 +101,31 @@ export default function Register( {navigation}) {
   const styles = StyleSheet.create({
     container:{
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: '#D5E2EB',
       alignItems: 'center',
       justifyContent: 'center',
     
     },
     name:{
       fontWeight: 'bold',
-      fontSize: 30
+      fontSize: 25
     },
     input:{
       borderWidth: 1,
       borderColor: '#C9C8C7',
+      backgroundColor: '#fff',
       padding: 8,
-      marginTop: 25,
+      marginTop: 15,
       width: 200,
     },
     button:{
-      marginTop: 25,
+      marginTop: 20,
       width: 200,
-    }
+    },
+    logo:{
+      height: 80,
+      width: 90,
+    },
   });
   
 

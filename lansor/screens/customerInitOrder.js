@@ -122,7 +122,7 @@ export default function CustomerInitOrder({ navigation }) {
 const styles = StyleSheet.create({
     container:{
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: '#D5E2EB',
       alignItems: 'center',
       justifyContent: 'center',
       paddingTop: StatusBar.currentHeight,
@@ -134,6 +134,7 @@ const styles = StyleSheet.create({
     input:{
       borderWidth: 1,
       borderColor: '#C9C8C7',
+      backgroundColor: '#fff',
       padding: 8,
       marginTop: 25,
       width: 150,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button, Alert} from 'react-native';
+import { StyleSheet, View, Text, Button, Alert, Image} from 'react-native';
 
 export default function CustomerProfile({ navigation }) {
 
@@ -66,6 +66,7 @@ export default function CustomerProfile({ navigation }) {
 
   return (
     <View style={styles.container}>
+        <Image style={styles.logo} source={require('../logo.png')} />
         <Text style={styles.name}> Vitajte {technician.name}</Text>
         <Text> Vaše identifikačné číslo: {technician._id.slice(-5)}</Text>
         
@@ -87,7 +88,7 @@ export default function CustomerProfile({ navigation }) {
 const styles = StyleSheet.create({
   container:{
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#D5E2EB',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -103,5 +104,9 @@ const styles = StyleSheet.create({
   button:{
     marginTop: 50,
     width: 250,
-  }
+  },
+  logo:{
+    height: 80,
+    width: 90,
+  },
 });

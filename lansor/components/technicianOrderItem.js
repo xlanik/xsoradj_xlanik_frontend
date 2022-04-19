@@ -26,7 +26,7 @@ export default function TechnicianOrderItem({ pressHandlerRepaired, item }) {
       <Text style={styles.item}>{serviceActions}</Text>
       <TextInput
         multiline 
-        placeholder='Informácie o servisovaní' 
+        placeholder='Doplňte informácie servise...' 
         style={styles.input}
         onChangeText={(value) => setDesc(value)} />
       <TouchableOpacity onPress={() => pressHandlerRepaired(item, desc)}>
@@ -40,7 +40,7 @@ export default function TechnicianOrderItem({ pressHandlerRepaired, item }) {
 const styles = StyleSheet.create({
   container:{
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#D5E2EB',
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: '#bbb',
@@ -78,6 +78,8 @@ const styles = StyleSheet.create({
     padding: 8,
     margin: 10,
     width: 200,
+    backgroundColor: '#fff',
+    borderRadius: 15
   },
   name:{
     fontWeight: 'bold',

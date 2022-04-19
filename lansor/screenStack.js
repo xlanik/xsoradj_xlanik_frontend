@@ -11,9 +11,6 @@ import TechnicianProfile from './screens/technicianProfile';
 import TechnicianOrders from './screens/technicianOrders';
 import TechnicianOrderHistory from './screens/technicianOrderHistory';
 
-
-
-
 const screens = {
   Login: {
     screen: Login,

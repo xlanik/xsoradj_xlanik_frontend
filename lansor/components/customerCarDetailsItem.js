@@ -1,11 +1,7 @@
 import React, {isValidElement, useState} from 'react'
 import {StyleSheet, TouchableOpacity, Text, View, Image, Button} from 'react-native';
 
-export default function TechnicianOrderItem({ pressHandlerConfirmCar, item }) {
-
-  const pressHandlerVideoCall = () => {
-
-  }
+export default function CustomerCarDetailsItem({ pressHandlerConfirmCar, item }) {
 
   return (
   
@@ -22,10 +18,6 @@ export default function TechnicianOrderItem({ pressHandlerConfirmCar, item }) {
         <Text style={styles.itemConfirm}>Vozidlo opravené - potvrdiť prevzatie</Text>
       </TouchableOpacity> : 
       <Text style={styles.itemConfirmNotReady}>Vozidlo sa momentálne servisuje</Text>}
-
-      <View style={styles.button}>
-        <Button title='Začať videohovor s technikom' onPress={pressHandlerVideoCall} />
-      </View>
     </View>
      
   )
@@ -34,7 +26,7 @@ export default function TechnicianOrderItem({ pressHandlerConfirmCar, item }) {
 const styles = StyleSheet.create({
   container:{
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#D5E2EB',
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: '#bbb',
