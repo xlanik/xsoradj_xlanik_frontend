@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, Button, Alert, Image} from 'react-native';
+import NormalButton from '../components/normalButton';
+import ConfirmButton from '../components/confirmButton';
 
 export default function CustomerProfile({ navigation }) {
 
@@ -67,17 +69,9 @@ export default function CustomerProfile({ navigation }) {
         <Image style={styles.logo} source={require('../logo.png')} />
         <Text style={styles.name}> Vitajte {technician.name}</Text>
         <Text> Vaše identifikačné číslo: {technician._id.slice(-5)}</Text>
-        
-        <View style={styles.button}>
-          <Button title='Moje zákazky' onPress={pressHandlerOdrders} />
-        </View>
-        <View style={styles.button}>
-          <Button title='História opravených áut' onPress={pressHandlerHistory} />
-        </View>
-
-        <View style={styles.button}>
-          <Button title='Odhlásiť sa' onPress={pressHandlerLogout} />
-        </View>
+        <ConfirmButton title={'Moje zákazky'} onPress={pressHandlerOdrders}></ConfirmButton>
+        <NormalButton title={'História opravených áut'} onPress={pressHandlerHistory}></NormalButton>
+        <NormalButton title={'Odhlásiť sa'} onPress={pressHandlerLogout}></NormalButton>
       </View>
   );
 }

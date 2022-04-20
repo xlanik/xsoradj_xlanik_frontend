@@ -1,6 +1,8 @@
 import React,{useState} from 'react';
 import { StyleSheet, View, Text, Button, Alert,Image} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import NormalButton from '../components/normalButton';
+import ConfirmButton from '../components/confirmButton';
 
 export default function CustomerImageUpload({ navigation }) {
 
@@ -81,13 +83,9 @@ export default function CustomerImageUpload({ navigation }) {
     return (
         <View style={styles.container}>
 
-          <View style={styles.button}>
-            <Button title="Nahrať obrázok" onPress={handleChoosePhoto} />
-          </View>
+          <NormalButton title={'Nahrať obrázok'} onPress={handleChoosePhoto}></NormalButton>
+          <ConfirmButton title={'Objednať vozidlo do servisu'} onPress={pressHandlerOrders}></ConfirmButton>
 
-          <View style={styles.button}>
-            <Button  title='Objednať vozidlo do servisu' onPress={pressHandlerOrders} />
-          </View>
 
           {image && 
           <><Text style={styles.name}>Fotografia auta</Text><Image source={{ uri: image }} style={styles.image} /></>}
