@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Button, Switch, TextInput, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
-
+import ConfirmButton from '../components/confirmButton';
 
 export default function CustomerServiceOptions({ navigation }) {
 
@@ -104,9 +104,7 @@ export default function CustomerServiceOptions({ navigation }) {
             style={styles.input}
             onChangeText={(value) => setDescription(value)} />
 
-            <View style={styles.button}>
-              <Button title='Pokračuj na upload obrázku' onPress={pressHandlerOrders} />
-            </View>
+          <ConfirmButton title={'Pokračovať'} onPress={pressHandlerOrders}></ConfirmButton>
           </View>
         </View>
         </TouchableWithoutFeedback>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect  } from 'react';
 import { StyleSheet, View, TextInput, Button,Text, Switch, Alert, FlatList, ScrollView, StatusBar, SafeAreaView, LogBox } from 'react-native';
 import TechnicianAvailableItem from '../components/technicianAvailableItem';
+import ConfirmButton from '../components/confirmButton';
 
 export default function CustomerInitOrder({ navigation }) {
 
@@ -91,9 +92,7 @@ export default function CustomerInitOrder({ navigation }) {
                 <TextInput style={styles.input} placeholder="Model*" onChangeText={(value) => setModel(value)} />
                 <TextInput style={styles.input} placeholder="Rok výroby*" keyboardType = 'numeric' onChangeText={(value) => setRokVyroby(value)} /> 
                 <TextInput style={styles.input} placeholder="ŠPZ*" onChangeText={(value) => setSpz(value)} />
-                <View style={styles.button}>
-                    <Button title='Pokračuj na úkony' onPress={pressHandlerOrders} />
-                </View>
+                <ConfirmButton title={'Pokračovať'} onPress={pressHandlerOrders}></ConfirmButton>
                 <View style={styles.option}>
                     <Switch
                         trackColor={{ false: "#767577", true: "#81b0ff" }}
